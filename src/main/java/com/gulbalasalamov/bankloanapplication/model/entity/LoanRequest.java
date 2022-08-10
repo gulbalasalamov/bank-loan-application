@@ -1,5 +1,6 @@
 package com.gulbalasalamov.bankloanapplication.model.entity;
 
+import com.gulbalasalamov.bankloanapplication.model.LoanStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +23,7 @@ public class LoanRequest {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notification notification;
+
+    @Enumerated(EnumType.STRING)
+    private LoanStatus loanStatus;
 }

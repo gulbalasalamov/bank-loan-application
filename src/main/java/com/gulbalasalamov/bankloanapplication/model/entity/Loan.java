@@ -22,11 +22,13 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @Enumerated(EnumType.STRING)
     private LoanType loanType;
 
+    @Enumerated(EnumType.STRING)
     private LoanLimit loanLimit;
 
+    @Enumerated(EnumType.STRING)
     private LoanResult loanResult;
 
     @CreationTimestamp
