@@ -1,4 +1,4 @@
-package com.gulbalasalamov.bankloanapplication.model;
+package com.gulbalasalamov.bankloanapplication.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -46,6 +47,6 @@ public class Customer {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    private List<CreditApplication> creditApplications;
+    private List<LoanRequest> creditApplications;
 
 }
