@@ -21,15 +21,20 @@ public class Customer {
     private String nationalIdentityNumber;
 
     @NotBlank(message = "name can not be null")
-    private String name;
+    private String firstname;
 
     @NotBlank(message = "surname can not be null")
-    private String surname;
+    private String lastname;
 
     @NotNull(message = "monthly income can not be null")
     @Min(1)
     @Column(name = "monthly_income")
     private Double monthlyIncome;
+
+    private String gender;
+
+    @Min(18)
+    private  Integer age;
 
     @NotBlank(message = "phone can not be null")
     private String phone;
@@ -37,7 +42,6 @@ public class Customer {
     @Email
     private String email;
 
-    @Transient
     private Integer creditScore;
 
     @JsonIgnore
