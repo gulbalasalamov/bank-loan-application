@@ -1,8 +1,6 @@
 package com.gulbalasalamov.bankloanapplication.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gulbalasalamov.bankloanapplication.model.LoanApplicationStatus;
-import com.gulbalasalamov.bankloanapplication.model.LoanResult;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,11 +21,5 @@ public class LoanApplication {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private List<Loan> loans;
-
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Notification notification;
-
-    @Enumerated(EnumType.STRING)
-    private LoanApplicationStatus loanApplicationStatus;
 
 }

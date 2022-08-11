@@ -1,5 +1,8 @@
 package com.gulbalasalamov.bankloanapplication.service;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class NotificationService {
 //    public String sendMessageForResult(LoanApplication loanApplication) {
 //        String resultMessage = "Your loan application is " + loanApplication.getLoanApplicationStatus() ;

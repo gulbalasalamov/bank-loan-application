@@ -53,5 +53,11 @@ public class CustomerController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PutMapping("/{nationalIdentityNumber}/loan/{loanId}")
+    public ResponseEntity addLoanApplicationToCustomer(@PathVariable Long loanId,@PathVariable String nationalIdentityNumber){
+        customerService.addLoanApplicationToCustomer(loanId,nationalIdentityNumber);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
 }

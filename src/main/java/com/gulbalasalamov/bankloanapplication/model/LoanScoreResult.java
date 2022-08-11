@@ -1,6 +1,6 @@
 package com.gulbalasalamov.bankloanapplication.model;
 
-public enum LoanResult {
+public enum LoanScoreResult {
 
     NOT_RESULTED(0),
     REJECTED(500),
@@ -9,7 +9,7 @@ public enum LoanResult {
     private Integer loanScoreLimit;
 
 
-    LoanResult(Integer loanScoreLimit) {
+    LoanScoreResult(Integer loanScoreLimit) {
         this.loanScoreLimit = loanScoreLimit;
     }
 

@@ -1,8 +1,10 @@
 package com.gulbalasalamov.bankloanapplication.service;
 
 import com.gulbalasalamov.bankloanapplication.exception.CustomerNotFoundException;
+import com.gulbalasalamov.bankloanapplication.model.LoanStatus;
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
 import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
+import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
 import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
 import com.gulbalasalamov.bankloanapplication.model.mapper.Mapper;
 import com.gulbalasalamov.bankloanapplication.repository.CustomerRepository;
@@ -92,4 +94,27 @@ public class CustomerService {
             customerRepository.save(customer);
         });
     }
+
+    public List<LoanApplication> getCustomerLoanApplications(String nationalIdentityNumber) {
+        var customerByNationalIdentityNumber = findCustomerByNationalIdentityNumber(nationalIdentityNumber);
+        return customerByNationalIdentityNumber.get().getLoanApplications();
+    }
+
+//    private LoanApplication getActiveLoanApplicationByCustomer(String nationalIdentityNumber) {
+////        var customerDTO = customerRepository.
+//
+//    }
+
+//    List<LoanApplication> loanApplications = loanApplicationRepository.findAll();
+//    List<Loan> loans = loanRepository.findAll();
+//
+//        loanApplications.forEach();
+//
+//         loans.stream()
+//                 .filter(loan -> loan.getLoanStatus() == loan.getLoanStatus()))
+//            .collect(Collectors.toList());
+//
+//}
+
+
 }

@@ -1,8 +1,9 @@
 package com.gulbalasalamov.bankloanapplication.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.gulbalasalamov.bankloanapplication.model.LoanStatus;
 import com.gulbalasalamov.bankloanapplication.model.LoanLimit;
-import com.gulbalasalamov.bankloanapplication.model.LoanResult;
+import com.gulbalasalamov.bankloanapplication.model.LoanScoreResult;
 import com.gulbalasalamov.bankloanapplication.model.LoanType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,16 +30,22 @@ public class Loan {
     private LoanLimit loanLimit;
 
     @Enumerated(EnumType.STRING)
-    private LoanResult loanResult;
+    private LoanScoreResult loanScoreResult;
+
+    @Enumerated(EnumType.STRING)
+    private LoanStatus loanStatus;
 
     @CreationTimestamp
     @JsonFormat(pattern = "dd-MM-yyyy")
     //@Column(updatable = false, nullable = false)
     private Date loanDate;
 
-    public Loan(LoanType loanType, LoanLimit loanLimit, LoanResult loanResult) {
+    public Loan(LoanType loanType, LoanLimit loanLimit, LoanScoreResult loanScoreResult, LoanStatus loanStatus, Date loanDate) {
         this.loanType = loanType;
         this.loanLimit = loanLimit;
-        this.loanResult = loanResult;
+        this.loanScoreResult = loanScoreResult;
+        this.loanStatus = loanStatus;
+        this.loanDate = loanDate;
     }
+
 }
