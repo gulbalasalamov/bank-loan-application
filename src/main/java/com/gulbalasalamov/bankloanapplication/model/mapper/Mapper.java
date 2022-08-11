@@ -29,5 +29,4 @@ public class Mapper {
         customer.setAge(customerDTO.getAge());
         return customer;
     }
-    }
 }
