@@ -1,5 +1,5 @@
 package com.gulbalasalamov.bankloanapplication.model;
 
-public enum LoanStatus {
+public enum LoanApplicationStatus {
     OPEN,CLOSED
 }

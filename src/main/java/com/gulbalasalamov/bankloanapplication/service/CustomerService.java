@@ -6,9 +6,12 @@ import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
 import com.gulbalasalamov.bankloanapplication.model.mapper.Mapper;
 import com.gulbalasalamov.bankloanapplication.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,7 +24,7 @@ public class CustomerService {
     }
 
     protected Optional<Customer> findCustomerByNationalIdentityNumber(String nationalIdentityNumber) {
-        return Optional.ofNullable(customerRepository.findById(nationalIdentityNumber).orElseThrow(() ->
+        return Optional.ofNullable(customerRepository.findByNationalIdentityNumber(nationalIdentityNumber).orElseThrow(() ->
                 new CustomerNotFoundException("Related customer with National Identity Number: " + nationalIdentityNumber + " not found")));
     }
 
@@ -47,8 +50,8 @@ public class CustomerService {
         var customerByNationalIdentityNumber = findCustomerByNationalIdentityNumber(nationalIdentityNumber);
         customerByNationalIdentityNumber.ifPresent(customer -> {
             customer.setNationalIdentityNumber(customerDTO.getNationalIdentityNumber());
-            customer.setFirstname(customerDTO.getFirstName());
-            customer.setLastname(customerDTO.getLastName());
+            customer.setFirstName(customerDTO.getFirstName());
+            customer.setLastName(customerDTO.getLastName());
             customer.setPhone(customerDTO.getPhone());
             customer.setEmail(customerDTO.getEmail());
             customer.setMonthlyIncome(customerDTO.getMonthlyIncome());
@@ -63,5 +66,32 @@ public class CustomerService {
         customerByNationalIdentityNumber.ifPresent(customerRepository::delete);
     }
 
+//    public void patch(String nationalIdentityNumber, Map<Object, Object> fields) {
+//        var customerByNationalIdentityNumber = findCustomerByNationalIdentityNumber(nationalIdentityNumber);
+//        customerByNationalIdentityNumber.ifPresent(customer -> fields.forEach((key, value) -> {
+//            //use reflection to get field and set it to value
+//            Field field = ReflectionUtils.findField(Customer.class, (String) key);
+//            field.setAccessible(true);
+//            ReflectionUtils.setField(field, customerByNationalIdentityNumber.get(), value);
+//        }));
+//        customerRepository.save(customerByNationalIdentityNumber.get())
+//    }
 
+    public void updateCustomerWithMap(String nationalIdentityNumber, Map<Object, Object> objectMap) {
+        var customerByNationalIdentityNumber = findCustomerByNationalIdentityNumber(nationalIdentityNumber);
+        Customer customer = customerByNationalIdentityNumber.get();
+//        customerByNationalIdentityNumber.ifPresent(customer -> objectMap.forEach((key, value) -> {
+//            //use reflection to get field and set it to value
+//            Field field = ReflectionUtils.findField(Customer.class, (String) key);
+//            //field.setAccessible(true);
+//            ReflectionUtils.setField(field, customer, value);
+//        }));
+        objectMap.forEach((key,value) -> {
+            Field field = ReflectionUtils.findField(Customer.class, (String) key);
+            field.setAccessible(true);
+            ReflectionUtils.setField(field,customer,value);
+        });
+        customerRepository.save(customer);
+
+    }
 }

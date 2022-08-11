@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gulbalasalamov.bankloanapplication.model.LoanLimit;
 import com.gulbalasalamov.bankloanapplication.model.LoanResult;
 import com.gulbalasalamov.bankloanapplication.model.LoanType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "loan")
 public class Loan {
@@ -33,6 +33,6 @@ public class Loan {
 
     @CreationTimestamp
     @JsonFormat(pattern = "dd-MM-yyyy")
-    @Column(updatable = false, nullable = false)
+    //@Column(updatable = false, nullable = false)
     private Date loanDate;
 }

@@ -6,9 +6,10 @@ import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
 public class Mapper {
     public static CustomerDTO toDto(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setId(customer.getId());
         customerDTO.setNationalIdentityNumber(customer.getNationalIdentityNumber());
-        customerDTO.setFirstName(customer.getFirstname());
-        customerDTO.setLastName(customer.getLastname());
+        customerDTO.setFirstName(customer.getFirstName());
+        customerDTO.setLastName(customer.getLastName());
         customerDTO.setPhone(customer.getPhone());
         customerDTO.setEmail(customer.getEmail());
         customerDTO.setMonthlyIncome(customer.getMonthlyIncome());
@@ -19,9 +20,11 @@ public class Mapper {
 
     public static Customer toEntity(CustomerDTO customerDTO) {
         Customer customer = new Customer();
+        customer.setId(customerDTO.getId());
         customer.setNationalIdentityNumber(customerDTO.getNationalIdentityNumber());
-        customer.setFirstname(customerDTO.getFirstName());
-        customer.setLastname(customerDTO.getLastName());
+//        customer.setNationalIdentityNumber(customerDTO.getNationalIdentityNumber());
+        customer.setFirstName(customerDTO.getFirstName());
+        customer.setLastName(customerDTO.getLastName());
         customer.setPhone(customerDTO.getPhone());
         customer.setEmail(customerDTO.getEmail());
         customer.setMonthlyIncome(customerDTO.getMonthlyIncome());
