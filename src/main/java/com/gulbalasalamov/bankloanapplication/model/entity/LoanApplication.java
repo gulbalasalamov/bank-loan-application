@@ -2,6 +2,7 @@ package com.gulbalasalamov.bankloanapplication.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gulbalasalamov.bankloanapplication.model.LoanApplicationStatus;
+import com.gulbalasalamov.bankloanapplication.model.LoanResult;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,4 +29,5 @@ public class LoanApplication {
 
     @Enumerated(EnumType.STRING)
     private LoanApplicationStatus loanApplicationStatus;
+
 }

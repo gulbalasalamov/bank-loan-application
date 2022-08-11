@@ -35,4 +35,10 @@ public class Loan {
     @JsonFormat(pattern = "dd-MM-yyyy")
     //@Column(updatable = false, nullable = false)
     private Date loanDate;
+
+    public Loan(LoanType loanType, LoanLimit loanLimit, LoanResult loanResult) {
+        this.loanType = loanType;
+        this.loanLimit = loanLimit;
+        this.loanResult = loanResult;
+    }
 }

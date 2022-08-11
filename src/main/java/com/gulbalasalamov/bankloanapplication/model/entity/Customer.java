@@ -50,16 +50,6 @@ public class Customer {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    private List<LoanApplication> creditApplications;
+    private List<LoanApplication> loanApplications;
 
-    public Customer(String nationalIdentityNumber, String firstName, String lastName, Double monthlyIncome, String gender, Integer age, String phone, String email) {
-        this.nationalIdentityNumber = nationalIdentityNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.monthlyIncome = monthlyIncome;
-        this.gender = gender;
-        this.age = age;
-        this.phone = phone;
-        this.email = email;
-    }
 }
