@@ -1,16 +1,23 @@
 package com.gulbalasalamov.bankloanapplication.model.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerDTO {
     @Pattern(regexp = "[1-9][0-9]{10}")
     private String nationalIdentityNumber;
 
     @NotBlank(message = "name can not be null")
-    private String name;
+    private String firstName;
 
     @NotBlank(message = "surname can not be null")
-    private String surname;
+    private String lastName;
 
     @NotBlank(message = "phone can not be null")
     private String phone;
