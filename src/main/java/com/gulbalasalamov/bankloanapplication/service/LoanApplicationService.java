@@ -4,15 +4,12 @@ import com.gulbalasalamov.bankloanapplication.exception.LoanNotFoundException;
 import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
 import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
 import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
-import com.gulbalasalamov.bankloanapplication.repository.CustomerRepository;
+import com.gulbalasalamov.bankloanapplication.model.entity.Notification;
 import com.gulbalasalamov.bankloanapplication.repository.LoanApplicationRepository;
-import com.gulbalasalamov.bankloanapplication.repository.LoanRepository;
-import com.gulbalasalamov.bankloanapplication.repository.NotificationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class LoanApplicationService {
@@ -63,6 +60,17 @@ public class LoanApplicationService {
 //            loanApplication.setLoans(loanApplication.getLoans());
 //            loanApplicationRepository.save(loanApplication);
         });
+    }
+
+    public void addNotificationToLoanApplication(Long loanApplicationId, Long notificationId) {
+        var loanApplicationById = findLoanApplicationById(loanApplicationId);
+        var notification = notificationService.getNotificationById(notificationId);
+
+        loanApplicationById.ifPresent(loanApplication -> {
+            loanApplication.setNotification(notification);
+            loanApplicationRepository.save(loanApplication);
+        });
+
     }
 
 
