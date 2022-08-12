@@ -1,6 +1,5 @@
 package com.gulbalasalamov.bankloanapplication.service;
 
-import com.gulbalasalamov.bankloanapplication.exception.CustomerNotFoundException;
 import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
 import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
 import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
@@ -16,20 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class LoanApplicationService {
-//    private final LoanApplicationRepository loanApplicationRepository;
-//    private final CustomerRepository customerRepository;
-//    private final LoanRepository loanRepository;
-//    private final NotificationRepository notificationRepository;
-//
-//    public LoanApplicationService(LoanApplicationRepository loanApplicationRepository,
-//                                  CustomerRepository customerRepository,
-//                                  LoanRepository loanRepository,
-//                                  NotificationRepository notificationRepository) {
-//        this.loanApplicationRepository = loanApplicationRepository;
-//        this.customerRepository = customerRepository;
-//        this.loanRepository = loanRepository;
-//        this.notificationRepository = notificationRepository;
-//    }
+
     private final CustomerService customerService;
     private final LoanService loanService;
     private final NotificationService notificationService;
@@ -59,6 +45,13 @@ public class LoanApplicationService {
             loanApplication.setLoans(loanApplication.getLoans());
             loanApplicationRepository.save(loanApplication);
         });
+    }
+
+    public void isTHereAnyActiveApplicationByCustomer(String nationalIdentityNumber){
+        Optional<Customer> customerByNationalIdentityNumber = customerService.findCustomerByNationalIdentityNumber(nationalIdentityNumber);
+        List<LoanApplication> loanApplications = customerByNationalIdentityNumber.get().getLoanApplications();
+
+
     }
 
 

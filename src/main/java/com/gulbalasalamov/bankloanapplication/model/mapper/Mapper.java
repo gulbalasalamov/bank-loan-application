@@ -15,6 +15,7 @@ public class Mapper {
         customerDTO.setMonthlyIncome(customer.getMonthlyIncome());
         customerDTO.setGender(customer.getGender());
         customerDTO.setAge(customer.getAge());
+        customerDTO.setLoanApplications(customer.getLoanApplications());
         return customerDTO;
     }
 
@@ -30,6 +31,7 @@ public class Mapper {
         customer.setMonthlyIncome(customerDTO.getMonthlyIncome());
         customer.setGender(customerDTO.getGender());
         customer.setAge(customerDTO.getAge());
+        customer.setLoanApplications(customerDTO.getLoanApplications());
         return customer;
     }
 }

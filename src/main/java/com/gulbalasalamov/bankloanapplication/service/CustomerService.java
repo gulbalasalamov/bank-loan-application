@@ -3,6 +3,7 @@ package com.gulbalasalamov.bankloanapplication.service;
 import com.gulbalasalamov.bankloanapplication.exception.CustomerNotFoundException;
 import com.gulbalasalamov.bankloanapplication.model.LoanStatus;
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
+import com.gulbalasalamov.bankloanapplication.model.dto.CustomerLoanApplicationResponse;
 import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
 import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
 import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
@@ -98,6 +99,10 @@ public class CustomerService {
     public List<LoanApplication> getCustomerLoanApplications(String nationalIdentityNumber) {
         var customerByNationalIdentityNumber = findCustomerByNationalIdentityNumber(nationalIdentityNumber);
         return customerByNationalIdentityNumber.get().getLoanApplications();
+    }
+
+    public List<CustomerLoanApplicationResponse> getJoinInformation(){
+        return customerRepository.getJoinInformation();
     }
 
 //    private LoanApplication getActiveLoanApplicationByCustomer(String nationalIdentityNumber) {

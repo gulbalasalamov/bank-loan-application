@@ -48,8 +48,13 @@ public class Customer {
 
     private Integer creditScore;
 
+//    @JsonIgnore
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<LoanApplication> loanApplications;
+
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = LoanApplication.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "cp_fk",referencedColumnName = "id")
     private List<LoanApplication> loanApplications;
 
 }

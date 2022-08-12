@@ -18,6 +18,8 @@ public class LoanApplication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String description;
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private List<Loan> loans;

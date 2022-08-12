@@ -1,6 +1,7 @@
 package com.gulbalasalamov.bankloanapplication.controller;
 
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
+import com.gulbalasalamov.bankloanapplication.model.dto.CustomerLoanApplicationResponse;
 import com.gulbalasalamov.bankloanapplication.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,11 @@ public class CustomerController {
     @GetMapping("/all")
     public ResponseEntity<List<CustomerDTO>> getAllCustomers() {
         return new ResponseEntity(customerService.getAllCustomers(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getJoinInfo")
+    public ResponseEntity<List<CustomerLoanApplicationResponse>> getJoinInformation() {
+        return new ResponseEntity(customerService.getJoinInformation(), HttpStatus.OK);
     }
 
     @GetMapping("/get/{nationalIdentityNumber}")
@@ -53,7 +59,7 @@ public class CustomerController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("/{nationalIdentityNumber}/loan/{loanId}")
+    @PutMapping("/{nationalIdentityNumber}/LoanApplication/{loanId}")
     public ResponseEntity addLoanApplicationToCustomer(@PathVariable Long loanId,@PathVariable String nationalIdentityNumber){
         customerService.addLoanApplicationToCustomer(loanId,nationalIdentityNumber);
         return new ResponseEntity(HttpStatus.OK);

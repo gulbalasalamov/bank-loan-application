@@ -1,10 +1,12 @@
 package com.gulbalasalamov.bankloanapplication.model.dto;
 
+import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -36,4 +38,7 @@ public class CustomerDTO {
 
 //    @Min(18)
     private Integer age;
+
+    private List<LoanApplication> loanApplications;
+
 }
