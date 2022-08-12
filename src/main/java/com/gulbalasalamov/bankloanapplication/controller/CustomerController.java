@@ -49,7 +49,7 @@ public class CustomerController {
 
     @PatchMapping("/update/{nationalIdentityNumber}")
     public ResponseEntity updateCustomerPartially(@PathVariable String nationalIdentityNumber, @RequestBody Map<Object, Object> objectMap) {
-        customerService.updateCustomerWithMap(nationalIdentityNumber, objectMap);
+        customerService.updateCustomerPartially(nationalIdentityNumber, objectMap);
         return new ResponseEntity(HttpStatus.OK);
     }
 

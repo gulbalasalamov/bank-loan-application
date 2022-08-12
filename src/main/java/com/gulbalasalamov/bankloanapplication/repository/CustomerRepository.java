@@ -2,12 +2,9 @@ package com.gulbalasalamov.bankloanapplication.repository;
 
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerLoanApplicationResponse;
 import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
-import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
-import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 

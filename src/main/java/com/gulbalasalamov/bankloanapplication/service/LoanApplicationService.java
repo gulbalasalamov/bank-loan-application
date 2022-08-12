@@ -37,14 +37,14 @@ public class LoanApplicationService {
     }
 
     public void addLoanToLoanApplication(Long loanId, Long loanApplicationId) {
-        var loanApplicationById = loanApplicationRepository.findById(loanApplicationId);
-        var loanById = loanService.findLoanById(loanId);
-        loanApplicationById.ifPresent(loanApplication -> {
-            Loan loan = loanById.get();
-            loanApplication.getLoans().add(loan);
-            loanApplication.setLoans(loanApplication.getLoans());
-            loanApplicationRepository.save(loanApplication);
-        });
+//        var loanApplicationById = loanApplicationRepository.findById(loanApplicationId);
+//        var loanById = loanService.findLoanById(loanId);
+//        loanApplicationById.ifPresent(loanApplication -> {
+//            Loan loan = loanById.get();
+//            loanApplication.getLoans().add(loan);
+//            loanApplication.setLoans(loanApplication.getLoans());
+//            loanApplicationRepository.save(loanApplication);
+//        });
     }
 
     public void isTHereAnyActiveApplicationByCustomer(String nationalIdentityNumber){

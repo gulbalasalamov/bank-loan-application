@@ -6,7 +6,7 @@ import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
 public class Mapper {
     public static CustomerDTO toDto(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setId(customer.getId());
+        //customerDTO.setId(customer.getId());
         customerDTO.setNationalIdentityNumber(customer.getNationalIdentityNumber());
         customerDTO.setFirstName(customer.getFirstName());
         customerDTO.setLastName(customer.getLastName());
@@ -15,13 +15,13 @@ public class Mapper {
         customerDTO.setMonthlyIncome(customer.getMonthlyIncome());
         customerDTO.setGender(customer.getGender());
         customerDTO.setAge(customer.getAge());
-        customerDTO.setLoanApplications(customer.getLoanApplications());
+        //customerDTO.setLoanApplications(customer.getLoanApplications());
         return customerDTO;
     }
 
     public static Customer toEntity(CustomerDTO customerDTO) {
         Customer customer = new Customer();
-        customer.setId(customerDTO.getId());
+        //customer.setId(customerDTO.getId());
         customer.setNationalIdentityNumber(customerDTO.getNationalIdentityNumber());
 //        customer.setNationalIdentityNumber(customerDTO.getNationalIdentityNumber());
         customer.setFirstName(customerDTO.getFirstName());
@@ -31,7 +31,7 @@ public class Mapper {
         customer.setMonthlyIncome(customerDTO.getMonthlyIncome());
         customer.setGender(customerDTO.getGender());
         customer.setAge(customerDTO.getAge());
-        customer.setLoanApplications(customerDTO.getLoanApplications());
+        //customer.setLoanApplications(customerDTO.getLoanApplications());
         return customer;
     }
 }
