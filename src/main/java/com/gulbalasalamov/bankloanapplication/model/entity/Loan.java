@@ -51,6 +51,4 @@ public class Loan {
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "loan")
     private LoanApplication loanApplication;
 
-
-
 }

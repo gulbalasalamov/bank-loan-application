@@ -1,5 +1,6 @@
 package com.gulbalasalamov.bankloanapplication.controller;
 
+import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
 import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
 import com.gulbalasalamov.bankloanapplication.service.LoanApplicationService;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,22 @@ public class LoanApplicationController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    @GetMapping("/get/{loanApplicationId}")
+    public ResponseEntity<LoanApplication> getLoanApplicationById(@PathVariable Long loanApplicationId) {
+        return new ResponseEntity(loanApplicationService.getLoanApplicationById(loanApplicationId), HttpStatus.OK);
+    }
+
     @PutMapping("/{loanApplicationId}/loan/{loanId}")
-    public ResponseEntity addLoanToLoanApplication(@PathVariable Long loanApplicationId,@PathVariable Long loanId){
-        loanApplicationService.addLoanToLoanApplication(loanId,loanApplicationId);
+    public ResponseEntity addLoanToLoanApplication(@PathVariable Long loanApplicationId, @PathVariable Long loanId) {
+        loanApplicationService.addLoanToLoanApplication(loanId, loanApplicationId);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{loanApplicationId}")
+    public ResponseEntity deleteLoanApplication(@PathVariable Long loanApplicationId) {
+        loanApplicationService.deleteLoanApplication(loanApplicationId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+
 }

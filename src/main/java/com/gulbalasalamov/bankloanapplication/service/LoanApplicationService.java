@@ -1,5 +1,6 @@
 package com.gulbalasalamov.bankloanapplication.service;
 
+import com.gulbalasalamov.bankloanapplication.exception.LoanNotFoundException;
 import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
 import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
 import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
@@ -31,29 +32,45 @@ public class LoanApplicationService {
         this.loanApplicationRepository = loanApplicationRepository;
     }
 
-    public void createLoanApplication(LoanApplication loanApplication){
+    protected Optional<LoanApplication> findLoanApplicationById(Long id) {
+        return Optional.ofNullable(loanApplicationRepository.findById(id).orElseThrow(() ->
+                new LoanNotFoundException("Related loan with id: " + id + " not found")));
+    }
+
+    public void createLoanApplication(LoanApplication loanApplication) {
         //LoanApplication loanApplication = new LoanApplication();
         loanApplicationRepository.save(loanApplication);
     }
 
+    public LoanApplication getLoanApplicationById(Long loanApplicationId) {
+        return findLoanApplicationById(loanApplicationId).get();
+    }
+
+    public void deleteLoanApplication(Long loanApplicationId) {
+        var loanApplication = findLoanApplicationById(loanApplicationId);
+        loanApplication.ifPresent(loanApplicationRepository::delete);
+    }
+
+    //TODO: known issue - the same loan can be assigned to multiple loan application although relation is 1-1
     public void addLoanToLoanApplication(Long loanId, Long loanApplicationId) {
-//        var loanApplicationById = loanApplicationRepository.findById(loanApplicationId);
-//        var loanById = loanService.findLoanById(loanId);
-//        loanApplicationById.ifPresent(loanApplication -> {
-//            Loan loan = loanById.get();
+        var loanApplicationById = loanApplicationRepository.findById(loanApplicationId);
+        var loanById = loanService.findLoanById(loanId);
+        loanApplicationById.ifPresent(loanApplication -> {
+            Loan loan = loanById.get();
+            loanApplication.setLoan(loan);
+            loanApplicationRepository.save(loanApplication);
 //            loanApplication.getLoans().add(loan);
 //            loanApplication.setLoans(loanApplication.getLoans());
 //            loanApplicationRepository.save(loanApplication);
-//        });
+        });
     }
 
-    public void isTHereAnyActiveApplicationByCustomer(String nationalIdentityNumber){
+
+    public void isTHereAnyActiveApplicationByCustomer(String nationalIdentityNumber) {
         Optional<Customer> customerByNationalIdentityNumber = customerService.findCustomerByNationalIdentityNumber(nationalIdentityNumber);
         List<LoanApplication> loanApplications = customerByNationalIdentityNumber.get().getLoanApplications();
 
-
     }
-
 
 
 //    boolean isThereAnyActiveApplicationByCustomer(){}
@@ -61,7 +78,6 @@ public class LoanApplicationService {
 //    void UpdateNotResultedApplication{}
 //    void deleteCreditApplication(){}
 //
-
 
 
 }

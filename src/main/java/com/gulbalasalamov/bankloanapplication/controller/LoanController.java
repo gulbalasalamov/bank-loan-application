@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/loan")
 public class LoanController {
@@ -25,4 +27,30 @@ public class LoanController {
         loanService.createLoan(loan);
         return new ResponseEntity(HttpStatus.CREATED);
     }
+
+    @GetMapping("get/{loanId}")
+    public ResponseEntity getLoanById(@PathVariable Long loanId) {
+        return new ResponseEntity(loanService.getLoanById(loanId), HttpStatus.OK);
+    }
+
+    @PutMapping("/update/{loanId}")
+    public ResponseEntity updateLoan(@PathVariable Long loanId, @RequestBody Loan loan) {
+        loanService.updateLoan(loanId, loan);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    //TODO: need enum-string fix in LoanService
+    @PatchMapping("/update/{loanId}")
+    public ResponseEntity updateLoanPartially(@PathVariable Long loanId, @RequestBody Map<Object, Object> objectMap) {
+        loanService.updateLoanPartially(loanId, objectMap);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{loanId}")
+    public ResponseEntity deleteLoan(@PathVariable Long loanId) {
+        loanService.deleteLoan(loanId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+
 }

@@ -34,4 +34,5 @@ public class Mapper {
         //customer.setLoanApplications(customerDTO.getLoanApplications());
         return customer;
     }
+
 }

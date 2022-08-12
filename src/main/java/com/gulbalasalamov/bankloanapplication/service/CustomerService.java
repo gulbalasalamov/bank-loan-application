@@ -33,7 +33,6 @@ public class CustomerService {
                 new CustomerNotFoundException("Related customer with National Identity Number: " + nationalIdentityNumber + " not found")));
     }
 
-    //TODO: Check if findById() works instead of findByNationalIdentityNumber() declared in CustomerRepository
     public CustomerDTO getCustomerByNationalIdentityNumber(String nationalIdentityNumber) {
         return Mapper.toDto(findCustomerByNationalIdentityNumber(nationalIdentityNumber).get());
 
