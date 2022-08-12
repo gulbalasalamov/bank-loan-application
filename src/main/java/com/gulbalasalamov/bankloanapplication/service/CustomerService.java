@@ -1,11 +1,9 @@
 package com.gulbalasalamov.bankloanapplication.service;
 
 import com.gulbalasalamov.bankloanapplication.exception.CustomerNotFoundException;
-import com.gulbalasalamov.bankloanapplication.model.LoanStatus;
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerLoanApplicationResponse;
 import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
-import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
 import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
 import com.gulbalasalamov.bankloanapplication.model.mapper.Mapper;
 import com.gulbalasalamov.bankloanapplication.repository.CustomerRepository;
@@ -73,7 +71,7 @@ public class CustomerService {
         customerByNationalIdentityNumber.ifPresent(customerRepository::delete);
     }
 
-    public void updateCustomerWithMap(String nationalIdentityNumber, Map<Object, Object> objectMap) {
+    public void updateCustomerPartially(String nationalIdentityNumber, Map<Object, Object> objectMap) {
         var customerByNationalIdentityNumber = findCustomerByNationalIdentityNumber(nationalIdentityNumber);
         customerByNationalIdentityNumber.ifPresent(customer -> objectMap.forEach((key, value) -> {
             //use reflection to get field and set it to value

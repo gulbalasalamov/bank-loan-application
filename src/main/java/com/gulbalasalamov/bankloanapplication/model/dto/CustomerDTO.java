@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CustomerDTO {
 
-    private Long id;
+   // private Long id;
 
    // @Pattern(regexp = "[1-9][0-9]{10}")
     private String nationalIdentityNumber;
@@ -39,6 +39,6 @@ public class CustomerDTO {
 //    @Min(18)
     private Integer age;
 
-    private List<LoanApplication> loanApplications;
+    //private List<LoanApplication> loanApplications;
 
 }

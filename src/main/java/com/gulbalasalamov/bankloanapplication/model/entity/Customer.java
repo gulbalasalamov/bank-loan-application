@@ -16,12 +16,13 @@ import java.util.List;
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+//    private Long id;
 
     //@Column(name = "national_identity_number",length = 11,updatable = false, nullable = false)
     //@NotBlank(message = "national identity number can not be blank")
     //@Pattern(regexp = "[1-9][0-9]{10}")
+    @Column(name = "national_identity_number")
     private String nationalIdentityNumber;
 
     //@NotBlank(message = "name can not be null")
@@ -53,8 +54,8 @@ public class Customer {
 //    private List<LoanApplication> loanApplications;
 
     @JsonIgnore
-    @OneToMany(targetEntity = LoanApplication.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "cp_fk",referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_national_identity_number")
     private List<LoanApplication> loanApplications;
 
 }

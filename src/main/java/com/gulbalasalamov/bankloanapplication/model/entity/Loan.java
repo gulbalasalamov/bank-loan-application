@@ -48,4 +48,9 @@ public class Loan {
         this.loanDate = loanDate;
     }
 
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "loan")
+    private LoanApplication loanApplication;
+
+
+
 }

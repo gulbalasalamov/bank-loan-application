@@ -21,7 +21,18 @@ public class LoanApplication {
     private String description;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Loan> loans;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Customer customer;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="notification_id")
+    private Notification notification;
+
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="loan_id")
+    private Loan loan;
 
 }
