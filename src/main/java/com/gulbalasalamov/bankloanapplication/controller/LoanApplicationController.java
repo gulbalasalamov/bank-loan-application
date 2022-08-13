@@ -22,14 +22,14 @@ public class LoanApplicationController {
     }
 
     @PostMapping("/create/{nationalIdentityNumber}/loan/{loanId}")
-    public ResponseEntity createLoanApplication(@PathVariable String nationalIdentityNumber, @PathVariable Long loanId) {
+    public ResponseEntity<Integer> createLoanApplication(@PathVariable String nationalIdentityNumber, @PathVariable Long loanId) {
         loanApplicationService.createLoanApplication(nationalIdentityNumber,loanId);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<Integer>(HttpStatus.CREATED);
     }
 
     @GetMapping("/get/{loanApplicationId}")
     public ResponseEntity<LoanApplication> getLoanApplicationById(@PathVariable Long loanApplicationId) {
-        return new ResponseEntity(loanApplicationService.getLoanApplicationById(loanApplicationId), HttpStatus.OK);
+        return new ResponseEntity<>(loanApplicationService.getLoanApplicationById(loanApplicationId), HttpStatus.OK);
     }
 
     @PutMapping("/{loanApplicationId}/loan/{loanId}")
@@ -51,7 +51,7 @@ public class LoanApplicationController {
     }
 
     @GetMapping(value = "/active-and-approved/{nationalIdentityNumber}")
-    public ResponseEntity<LoanApplication> getActiveAndApprovedCreditApplicationByCustomer(@PathVariable String nationalIdentityNumber) {;
+    public ResponseEntity<Loan> getActiveAndApprovedCreditApplicationByCustomer(@PathVariable String nationalIdentityNumber) {;
         return new ResponseEntity( loanApplicationService.getActiveAndApprovedLoanApplicationOfCustomer(nationalIdentityNumber),HttpStatus.OK);
     }
 
