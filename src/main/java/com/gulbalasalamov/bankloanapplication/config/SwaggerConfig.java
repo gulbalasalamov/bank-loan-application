@@ -25,7 +25,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfoMetaData() {
 
-        return new ApiInfoBuilder().title("Second-Hand Shopping App")
+        return new ApiInfoBuilder().title("Bank Loan Application")
                 .description("API Endpoint Decoration")
                 .contact(new Contact("Gulbala Salamov", "https://www.github.com/gulbalasalamov", "g.salamov@gmail.com"))
                 .license("Apache 2.0")
