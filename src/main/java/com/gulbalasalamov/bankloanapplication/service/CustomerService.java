@@ -98,25 +98,10 @@ public class CustomerService {
         return customerByNationalIdentityNumber.get().getLoanApplications();
     }
 
-    public List<CustomerLoanApplicationResponse> getJoinInformation(){
-        return customerRepository.getJoinInformation();
-    }
-
-//    private LoanApplication getActiveLoanApplicationByCustomer(String nationalIdentityNumber) {
-////        var customerDTO = customerRepository.
-//
+//    public List<CustomerLoanApplicationResponse> getJoinInformation(){
+//        return customerRepository.getJoinInformation();
 //    }
 
-//    List<LoanApplication> loanApplications = loanApplicationRepository.findAll();
-//    List<Loan> loans = loanRepository.findAll();
-//
-//        loanApplications.forEach();
-//
-//         loans.stream()
-//                 .filter(loan -> loan.getLoanStatus() == loan.getLoanStatus()))
-//            .collect(Collectors.toList());
-//
-//}
 
 
 }

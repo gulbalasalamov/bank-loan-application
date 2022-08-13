@@ -39,6 +39,8 @@ public class CustomerDTO {
 //    @Min(18)
     private Integer age;
 
-    //private List<LoanApplication> loanApplications;
+    private Integer loanScore;
+
+    private List<LoanApplication> loanApplications;
 
 }

@@ -1,19 +1,19 @@
 package com.gulbalasalamov.bankloanapplication.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 //import javax.validation.constraints.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "customer")
 @Entity
+
 public class Customer {
     @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,7 +47,7 @@ public class Customer {
     //@Email
     private String email;
 
-    private Integer creditScore;
+    private Integer loanScore = 500;
 
 //    @JsonIgnore
 //    @OneToMany(cascade = CascadeType.ALL)

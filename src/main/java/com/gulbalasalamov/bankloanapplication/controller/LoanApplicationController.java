@@ -1,12 +1,15 @@
 package com.gulbalasalamov.bankloanapplication.controller;
 
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
+import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
 import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
 import com.gulbalasalamov.bankloanapplication.model.entity.Notification;
 import com.gulbalasalamov.bankloanapplication.service.LoanApplicationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.Pattern;
 
 @RestController
 @RequestMapping("/api/v1/loanapplication")
@@ -18,9 +21,9 @@ public class LoanApplicationController {
         this.loanApplicationService = loanApplicationService;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity createLoanApplication(@RequestBody LoanApplication loanApplication) {
-        loanApplicationService.createLoanApplication(loanApplication);
+    @PostMapping("/create/{nationalIdentityNumber}/loan/{loanId}")
+    public ResponseEntity createLoanApplication(@PathVariable String nationalIdentityNumber, @PathVariable Long loanId) {
+        loanApplicationService.createLoanApplication(nationalIdentityNumber,loanId);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
@@ -47,5 +50,14 @@ public class LoanApplicationController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @GetMapping(value = "/active-and-approved/{nationalIdentityNumber}")
+    public ResponseEntity<LoanApplication> getActiveAndApprovedCreditApplicationByCustomer(@PathVariable String nationalIdentityNumber) {;
+        return new ResponseEntity( loanApplicationService.getActiveAndApprovedLoanApplicationOfCustomer(nationalIdentityNumber),HttpStatus.OK);
+    }
+
+//    @GetMapping(value = "/result/{loanApplicationById}")
+//    public ResponseEntity getFinalLoanApplicationResult(@PathVariable Long loanApplicationById){
+//
+//    }
 
 }

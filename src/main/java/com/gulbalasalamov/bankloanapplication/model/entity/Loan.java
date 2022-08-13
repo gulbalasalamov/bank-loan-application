@@ -26,8 +26,8 @@ public class Loan {
     @Enumerated(EnumType.STRING)
     private LoanType loanType;
 
-    @Enumerated(EnumType.STRING)
-    private LoanLimit loanLimit;
+    //@Enumerated(EnumType.STRING)
+    private Double loanLimit;
 
     @Enumerated(EnumType.STRING)
     private LoanScoreResult loanScoreResult;
@@ -40,7 +40,10 @@ public class Loan {
     //@Column(updatable = false, nullable = false)
     private Date loanDate;
 
-    public Loan(LoanType loanType, LoanLimit loanLimit, LoanScoreResult loanScoreResult, LoanStatus loanStatus, Date loanDate) {
+    private final Integer creditMultiplier = 4;
+
+
+    public Loan(LoanType loanType, Double loanLimit, LoanScoreResult loanScoreResult, LoanStatus loanStatus, Date loanDate) {
         this.loanType = loanType;
         this.loanLimit = loanLimit;
         this.loanScoreResult = loanScoreResult;

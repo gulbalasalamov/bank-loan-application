@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,8 +16,6 @@ public class LoanApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String description;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
@@ -35,4 +32,8 @@ public class LoanApplication {
     @JoinColumn(name="loan_id")
     private Loan loan;
 
+    public LoanApplication(Customer customer, Loan loan) {
+        this.customer = customer;
+        this.loan = loan;
+    }
 }

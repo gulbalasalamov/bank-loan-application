@@ -2,8 +2,12 @@ package com.gulbalasalamov.bankloanapplication.service;
 
 import com.gulbalasalamov.bankloanapplication.exception.LoanNotFoundException;
 
+import com.gulbalasalamov.bankloanapplication.model.LoanLimit;
+import com.gulbalasalamov.bankloanapplication.model.LoanScoreResult;
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
+import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
 import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
+import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
 import com.gulbalasalamov.bankloanapplication.repository.CustomerRepository;
 import com.gulbalasalamov.bankloanapplication.repository.LoanRepository;
 import org.springframework.stereotype.Service;
@@ -68,6 +72,7 @@ public class LoanService {
         loan.ifPresent(loanRepository::delete);
     }
 
-    private void creditLimitCalculator() {
-    }
+
+
+
 }

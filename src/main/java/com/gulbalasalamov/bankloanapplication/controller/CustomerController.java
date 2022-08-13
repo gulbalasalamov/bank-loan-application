@@ -24,10 +24,10 @@ public class CustomerController {
         return new ResponseEntity(customerService.getAllCustomers(), HttpStatus.OK);
     }
 
-    @GetMapping("/getJoinInfo")
-    public ResponseEntity<List<CustomerLoanApplicationResponse>> getJoinInformation() {
-        return new ResponseEntity(customerService.getJoinInformation(), HttpStatus.OK);
-    }
+//    @GetMapping("/getJoinInfo")
+//    public ResponseEntity<List<CustomerLoanApplicationResponse>> getJoinInformation() {
+//        return new ResponseEntity(customerService.getJoinInformation(), HttpStatus.OK);
+//    }
 
     @GetMapping("/get/{nationalIdentityNumber}")
     public ResponseEntity<CustomerDTO> getCustomerByNationalIdentityNumber(@PathVariable String nationalIdentityNumber) {
