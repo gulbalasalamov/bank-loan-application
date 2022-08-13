@@ -144,10 +144,12 @@ public class LoanApplicationService {
 
     private LoanApplication getActiveLoanApplicationOfCustomer(String nationalIdentityNumber) {
         Optional<Customer> customerByNationalIdentityNumber = customerService.findCustomerByNationalIdentityNumber(nationalIdentityNumber);
+
         LoanApplication loanApplication1 = customerByNationalIdentityNumber.get().getLoanApplications().stream()
                 .findFirst()
                 .get();
-        finalizeLoanApplication(loanApplication1.getId());
+        //TODO: needs a fix
+        finalizeLoanApplication(loanApplication1.getId()); // it fails here
 
         return customerByNationalIdentityNumber.get().getLoanApplications().stream()
                 .filter(loanApplication -> loanApplication.getCustomer() == customerByNationalIdentityNumber.get())
