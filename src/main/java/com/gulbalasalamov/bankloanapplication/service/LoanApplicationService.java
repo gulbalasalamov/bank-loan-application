@@ -11,11 +11,13 @@ import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
 import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
 import com.gulbalasalamov.bankloanapplication.repository.LoanApplicationRepository;
 import com.gulbalasalamov.bankloanapplication.repository.LoanRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class LoanApplicationService {
 
     private final CustomerService customerService;
@@ -61,40 +63,19 @@ public class LoanApplicationService {
         loanApplication.ifPresent(loanApplicationRepository::delete);
     }
 
-    //TODO: known issue - the same loan can be assigned to multiple loan application although relation is 1-1
-    public void addLoanToLoanApplication(Long loanId, Long loanApplicationId) {
-        var loanApplicationById = loanApplicationRepository.findById(loanApplicationId);
-        var loanById = loanService.findLoanById(loanId);
-        loanApplicationById.ifPresent(loanApplication -> {
-            Loan loan = loanById.get();
-            loanApplication.setLoan(loan);
-            loanApplicationRepository.save(loanApplication);
-        });
-    }
+    private Loan getNotResultedLoanApplicationOfCustomer(Customer customer) {
 
-    public void addNotificationToLoanApplication(Long loanApplicationId, Long notificationId) {
-        var loanApplicationById = findLoanApplicationById(loanApplicationId);
-        var notification = notificationService.getNotificationById(notificationId);
-
-        loanApplicationById.ifPresent(loanApplication -> {
-            loanApplication.setNotification(notification);
-            loanApplicationRepository.save(loanApplication);
-        });
-    }
-
-    private Optional<Loan> getNotResultedLoanOfCustomer(Customer customer) {
-
-        return Optional.of(
+        var optionalLoan =
                 customer.getLoanApplications().stream()
                         .filter(c -> c.getLoan().getLoanScoreResult().equals(LoanScoreResult.NOT_RESULTED))
-                        .findAny()
-                        .map(LoanApplication::getLoan)
-                        .orElseThrow(() -> new LoanNotFoundException("Not found"))
-        );
+                        .findFirst();
+
+        return optionalLoan.isPresent()?optionalLoan.get().getLoan():null;
+
     }
 
     public Loan loanLimitCalculator(LoanApplication loanApplication) {
-        //LoanApplication underReview = loanApplication;
+
         Loan loan = loanApplication.getLoan();
         Customer loanCustomer = loanApplication.getCustomer();
         Integer loanScore = loanCustomer.getLoanScore();
@@ -115,31 +96,31 @@ public class LoanApplicationService {
         return loan;
     }
 
-    private void finalizeLoanApplication(Long loanApplicationId) {
-        var loanApplicationById = findLoanApplicationById(loanApplicationId);
+    private void finalizeLoanApplication(LoanApplication loanApplication) {
 
-        loanApplicationById.ifPresent(loanApplication -> {
-            Customer loanCustomer = loanApplication.getCustomer();
-            var loanToUpdate = getNotResultedLoanOfCustomer(loanCustomer).get();
-            System.out.println("Getting loan application for resulting");
+        Customer loanCustomer = loanApplication.getCustomer();
 
-            Integer loanScore = loanCustomer.getLoanScore();
-            boolean loanScoreForApproval = (loanScore >= LoanScoreResult.REJECTED.getLoanScoreLimit());
+        var loanToUpdate = getNotResultedLoanApplicationOfCustomer(loanCustomer);
+        if (loanToUpdate == null) return;
+        log.info("Getting loan application for result");
 
-            if (loanScoreForApproval) {
-                loanToUpdate.setLoanScoreResult(LoanScoreResult.APPROVED);
-                loanApplication.setLoan(loanToUpdate);
-                loanToUpdate = loanLimitCalculator(loanApplication);
-                //loanApplication.setLoan(loanToUpdate);
-            } else {
-                loanToUpdate.setLoanScoreResult(LoanScoreResult.REJECTED);
-                loanToUpdate.setLoanStatus(LoanStatus.INACTIVE);
-            }
-            loanRepository.save(loanToUpdate);
-            System.out.println("resulted the application");
-            //TODO: modify sms
-            System.out.println("Sent sms result");
-        });
+        Integer loanScore = loanCustomer.getLoanScore();
+        boolean loanScoreForApproval = (loanScore >= LoanScoreResult.REJECTED.getLoanScoreLimit());
+
+        if (loanScoreForApproval) {
+            loanToUpdate.setLoanScoreResult(LoanScoreResult.APPROVED);
+            loanApplication.setLoan(loanToUpdate);
+            loanToUpdate = loanLimitCalculator(loanApplication);
+            //loanApplication.setLoan(loanToUpdate);
+        } else {
+            loanToUpdate.setLoanScoreResult(LoanScoreResult.REJECTED);
+            loanToUpdate.setLoanStatus(LoanStatus.INACTIVE);
+        }
+        loanRepository.save(loanToUpdate);
+        log.info("resulted the application");
+        //TODO: modify sms
+        log.info("Sent sms result");
+//        });
     }
 
     private LoanApplication getActiveLoanApplicationOfCustomer(String nationalIdentityNumber) {
@@ -148,26 +129,53 @@ public class LoanApplicationService {
         LoanApplication loanApplication1 = customerByNationalIdentityNumber.get().getLoanApplications().stream()
                 .findFirst()
                 .get();
-        //TODO: needs a fix
-        finalizeLoanApplication(loanApplication1.getId()); // it fails here
+        finalizeLoanApplication(loanApplication1); // it fails here
 
         return customerByNationalIdentityNumber.get().getLoanApplications().stream()
                 .filter(loanApplication -> loanApplication.getCustomer() == customerByNationalIdentityNumber.get())
                 .filter(loanApplication -> loanApplication.getLoan().getLoanStatus() == LoanStatus.ACTIVE)
                 .findAny()
-                .orElseThrow(() -> new LoanApplicationNotFoundException("LoanApplication not found"));
+                .orElseThrow(() -> new InvalidLoanApplicationException("."));
     }
 
-    public LoanApplication getActiveAndApprovedLoanApplicationOfCustomer(String nationalIdentityNumber) {
+    public Loan getActiveAndApprovedLoanApplicationOfCustomer(String nationalIdentityNumber) {
         LoanApplication activeLoanApplicationOfCustomer = getActiveLoanApplicationOfCustomer(nationalIdentityNumber);
 
         if (activeLoanApplicationOfCustomer.getLoan().getLoanScoreResult().equals(LoanScoreResult.NOT_RESULTED)) {
             throw new InvalidLoanApplicationException("!");
         }
-        return activeLoanApplicationOfCustomer;
-        //Long id = activeLoanApplicationOfCustomer.getLoan().getId();
-        //return loanService.getLoanById(id);
+        return activeLoanApplicationOfCustomer.getLoan();
+
     }
 
+
+    /**
+     * Manual adding. NOT TO USE AT THE MOMENT
+     *
+     * @param loanId
+     * @param loanApplicationId
+     */
+
+    //TODO: known issue - the same loan can be assigned to multiple loan application although relation is 1-1
+    public void addLoanToLoanApplication(Long loanId, Long loanApplicationId) {
+        var loanApplicationById = loanApplicationRepository.findById(loanApplicationId);
+        var loanById = loanService.findLoanById(loanId);
+        loanApplicationById.ifPresent(loanApplication -> {
+            Loan loan = loanById.get();
+            loanApplication.setLoan(loan);
+            loanApplicationRepository.save(loanApplication);
+        });
+    }
+
+
+    public void addNotificationToLoanApplication(Long loanApplicationId, Long notificationId) {
+        var loanApplicationById = findLoanApplicationById(loanApplicationId);
+        var notification = notificationService.getNotificationById(notificationId);
+
+        loanApplicationById.ifPresent(loanApplication -> {
+            loanApplication.setNotification(notification);
+            loanApplicationRepository.save(loanApplication);
+        });
+    }
 
 }
