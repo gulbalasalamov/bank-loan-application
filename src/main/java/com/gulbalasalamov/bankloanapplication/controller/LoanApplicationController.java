@@ -21,9 +21,9 @@ public class LoanApplicationController {
         this.loanApplicationService = loanApplicationService;
     }
 
-    @PostMapping("/create/{nationalIdentityNumber}/loan/{loanId}")
-    public ResponseEntity<Integer> createLoanApplication(@PathVariable String nationalIdentityNumber, @PathVariable Long loanId) {
-        loanApplicationService.createLoanApplication(nationalIdentityNumber,loanId);
+    @PostMapping("/create/{nationalIdentityNumber}")
+    public ResponseEntity<Integer> createLoanApplication(@PathVariable String nationalIdentityNumber) {
+        loanApplicationService.createLoanApplication(nationalIdentityNumber);
         return new ResponseEntity<Integer>(HttpStatus.CREATED);
     }
 
@@ -32,23 +32,23 @@ public class LoanApplicationController {
         return new ResponseEntity<>(loanApplicationService.getLoanApplicationById(loanApplicationId), HttpStatus.OK);
     }
 
-    @PutMapping("/{loanApplicationId}/loan/{loanId}")
-    public ResponseEntity addLoanToLoanApplication(@PathVariable Long loanApplicationId, @PathVariable Long loanId) {
-        loanApplicationService.addLoanToLoanApplication(loanId, loanApplicationId);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/{loanApplicationId}")
-    public ResponseEntity deleteLoanApplication(@PathVariable Long loanApplicationId) {
-        loanApplicationService.deleteLoanApplication(loanApplicationId);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @PutMapping("/{loanApplicationId}/notification/{notificationId}")
-    public ResponseEntity addNotificationToLoanApplication(@PathVariable Long loanApplicationId, @PathVariable Long notificationId) {
-        loanApplicationService.addNotificationToLoanApplication(loanApplicationId, notificationId);
-        return new ResponseEntity(HttpStatus.OK);
-    }
+//    @PutMapping("/{loanApplicationId}/loan/{loanId}")
+//    public ResponseEntity addLoanToLoanApplication(@PathVariable Long loanApplicationId, @PathVariable Long loanId) {
+//        loanApplicationService.addLoanToLoanApplication(loanId, loanApplicationId);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
+//
+//    @DeleteMapping("/delete/{loanApplicationId}")
+//    public ResponseEntity deleteLoanApplication(@PathVariable Long loanApplicationId) {
+//        loanApplicationService.deleteLoanApplication(loanApplicationId);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
+//
+//    @PutMapping("/{loanApplicationId}/notification/{notificationId}")
+//    public ResponseEntity addNotificationToLoanApplication(@PathVariable Long loanApplicationId, @PathVariable Long notificationId) {
+//        loanApplicationService.addNotificationToLoanApplication(loanApplicationId, notificationId);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
 
     @GetMapping(value = "/active-and-approved/{nationalIdentityNumber}")
     public ResponseEntity<Loan> getActiveAndApprovedCreditApplicationByCustomer(@PathVariable String nationalIdentityNumber) {;

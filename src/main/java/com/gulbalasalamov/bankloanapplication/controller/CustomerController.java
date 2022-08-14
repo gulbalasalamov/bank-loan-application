@@ -2,11 +2,13 @@ package com.gulbalasalamov.bankloanapplication.controller;
 
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerLoanApplicationResponse;
+import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
 import com.gulbalasalamov.bankloanapplication.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +26,6 @@ public class CustomerController {
         return new ResponseEntity(customerService.getAllCustomers(), HttpStatus.OK);
     }
 
-//    @GetMapping("/getJoinInfo")
-//    public ResponseEntity<List<CustomerLoanApplicationResponse>> getJoinInformation() {
-//        return new ResponseEntity(customerService.getJoinInformation(), HttpStatus.OK);
-//    }
 
     @GetMapping("/get/{nationalIdentityNumber}")
     public ResponseEntity<CustomerDTO> getCustomerByNationalIdentityNumber(@PathVariable String nationalIdentityNumber) {
@@ -56,12 +54,6 @@ public class CustomerController {
     @DeleteMapping("/delete/{nationalIdentityNumber}")
     public ResponseEntity deleteCustomer(@PathVariable String nationalIdentityNumber) {
         customerService.deleteCustomer(nationalIdentityNumber);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @PutMapping("/{nationalIdentityNumber}/LoanApplication/{loanId}")
-    public ResponseEntity addLoanApplicationToCustomer(@PathVariable Long loanId,@PathVariable String nationalIdentityNumber){
-        customerService.addLoanApplicationToCustomer(loanId,nationalIdentityNumber);
         return new ResponseEntity(HttpStatus.OK);
     }
 

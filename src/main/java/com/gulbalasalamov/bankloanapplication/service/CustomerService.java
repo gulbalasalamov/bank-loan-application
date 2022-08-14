@@ -21,14 +21,12 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
-    private final LoanApplicationRepository loanApplicationRepository;
 
-    public CustomerService(CustomerRepository customerRepository, LoanApplicationRepository loanApplicationRepository) {
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
-        this.loanApplicationRepository = loanApplicationRepository;
     }
 
-    protected Optional<Customer> findCustomerByNationalIdentityNumber(String nationalIdentityNumber) {
+    private Optional<Customer> findCustomerByNationalIdentityNumber(String nationalIdentityNumber) {
         return Optional.ofNullable(customerRepository.findByNationalIdentityNumber(nationalIdentityNumber).orElseThrow(() ->
                 new CustomerNotFoundException("Related customer with National Identity Number: " + nationalIdentityNumber + " not found")));
     }
@@ -81,22 +79,22 @@ public class CustomerService {
         }));
     }
 
-    public void addLoanApplicationToCustomer(Long loanApplicationId, String nationalIdentityNumber) {
-        var customerByNationalIdentityNumber = findCustomerByNationalIdentityNumber(nationalIdentityNumber);
-        var loanApplicationById = loanApplicationRepository.findById(loanApplicationId);
+//    public void addLoanApplicationToCustomer(Long loanApplicationId, String nationalIdentityNumber) {
+//        var customerByNationalIdentityNumber = findCustomerByNationalIdentityNumber(nationalIdentityNumber);
+//        var loanApplicationById = loanApplicationRepository.findById(loanApplicationId);
+//
+//        customerByNationalIdentityNumber.ifPresent(customer -> {
+//            LoanApplication loanApplication = loanApplicationById.get();
+//            customer.getLoanApplications().add(loanApplication);
+//            customer.setLoanApplications(customer.getLoanApplications());
+//            customerRepository.save(customer);
+//        });
+//    }
 
-        customerByNationalIdentityNumber.ifPresent(customer -> {
-            LoanApplication loanApplication = loanApplicationById.get();
-            customer.getLoanApplications().add(loanApplication);
-            customer.setLoanApplications(customer.getLoanApplications());
-            customerRepository.save(customer);
-        });
-    }
-
-    public List<LoanApplication> getCustomerLoanApplications(String nationalIdentityNumber) {
-        var customerByNationalIdentityNumber = findCustomerByNationalIdentityNumber(nationalIdentityNumber);
-        return customerByNationalIdentityNumber.get().getLoanApplications();
-    }
+//    public List<LoanApplication> getCustomerLoanApplications(String nationalIdentityNumber) {
+//        var customerByNationalIdentityNumber = findCustomerByNationalIdentityNumber(nationalIdentityNumber);
+//        return customerByNationalIdentityNumber.get().getLoanApplications();
+//    }
 
 //    public List<CustomerLoanApplicationResponse> getJoinInformation(){
 //        return customerRepository.getJoinInformation();
