@@ -141,7 +141,7 @@ Following request will return the bank customer with specified national identity
 
 | Type | Method |
 | ------ | ------ |
-| GET |https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/active-and-approved/{nationalIdentityNumber} |
+| GET | https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/result/{nationalIdentityNumber} |
 
 
 Following request will return an active and approved loan application with loan limit. 
