@@ -50,6 +50,10 @@ You can also asccess it locally by updating baseUrl with your local server port.
 
 ![image](https://user-images.githubusercontent.com/19313466/184607079-d706432f-460f-4323-873d-a95ebef97453.png)
 
+To have it your way in postman, fork it to your workspace and play around: 
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5231798-289c2878-e5a2-41ac-9cbb-e95f614d998d?action=collection%2Ffork&collection-url=entityId%3D5231798-289c2878-e5a2-41ac-9cbb-e95f614d998d%26entityType%3Dcollection%26workspaceId%3D0c774f82-43e3-4f89-961b-2b4f9bfabddc)
+
 --- 
 
 ## API Demonstration
