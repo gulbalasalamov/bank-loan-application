@@ -1,8 +1,14 @@
 # Bank Loan Aplication
 
-The purpose of this project is to build a potential backend system for bank loan application. 
+The purpose of this project is to build a potential backend system for bank loan application system. 
 
-The product is live and active on Heroku environment. The app is a demonstration for a loan application system. 
+The app is **live** and accessible on: https://bank-loan-application-demo.herokuapp.com
+
+You can play around directly using the endpoints. 
+
+For documentation please page scroll below.
+
+## Project Brief
 
 Verified users can register as bank customer and apply to loan. 
 
@@ -12,11 +18,9 @@ To do so, use the CustomerAPI and LoanApplicationAPI for the workflow.
 
 The LoanApi and NotificationAPI is for internal use.
 
----
 
 ## Technologies Used
 
----
 
 This project implementats Spring Boot framework with given dependencies:
 
@@ -29,11 +33,11 @@ This project implementats Spring Boot framework with given dependencies:
 - JUnit, Mockito -> (Unit Testing)
 - SLF4J --> Logging
 
----
+
 
 ## API Documentation
 
----
+
 
 To access Swagger doc, click live link below: 
 
@@ -50,11 +54,11 @@ To have it your way in postman, fork it to your workspace and play around:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5231798-289c2878-e5a2-41ac-9cbb-e95f614d998d?action=collection%2Ffork&collection-url=entityId%3D5231798-289c2878-e5a2-41ac-9cbb-e95f614d998d%26entityType%3Dcollection%26workspaceId%3D0c774f82-43e3-4f89-961b-2b4f9bfabddc)
 
---- 
+ 
 
 ## API Demonstration
 
----
+
 
 **Step 1. Register Securely**
 
@@ -222,11 +226,11 @@ New customer with loan score between 500 - 1000 and monthly income below 5000. T
 ```
 
 
----
+
 
 ## Functional Requirements & Analysis
 
----
+
 
 | **USER STORY ID** | **AS A** | **I WANT TO**                                | **SO THAT**                                                          |
 |-------------------|----------|----------------------------------------------|----------------------------------------------------------------------|
@@ -241,12 +245,12 @@ New customer with loan score between 500 - 1000 and monthly income below 5000. T
 | 9                 | admin    | send sms to customer                         | I can notify customer about the outcome of his/her loan application  |  
 | 10                | admin    | login & logout                               | I can securely enter and leave the system                            |
 
----
+
 
 ### ERD Database Design
 
----
+
 
 ![](https://github.com/gulbalasalamov/bank-loan-application/blob/master/doc/loan-application-erd.png)
 
----
+
