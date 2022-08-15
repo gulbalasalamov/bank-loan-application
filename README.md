@@ -1,5 +1,7 @@
 # Bank Loan Aplication
 
+The purpose of this project is to build a potential backend system for bank loan application. 
+
 The product is live and active on Heroku environment. The app is a demonstration for a loan application system. 
 
 Verified users can register as bank customer and apply to loan. 
@@ -12,26 +14,20 @@ The LoanApi and NotificationAPI is for internal use.
 
 ---
 
-## Project Brief
+## Technologies Used
 
 ---
 
-The purpose of this project is to build a potential backend system for bank loan application.
-
-The project aims to:
-
-- leverage spring security with secure endpoints,
-- register users with roles,
-- implement CRUD operations in database,
-- send/receive data using REST API
-
-This project omplementats Spring Boot framework with given dependencies:
+This project implementats Spring Boot framework with given dependencies:
 
 - Lombok --> Java annotation library which helps to reduce boilerplate code.
 - Spring Web --> Builds web, including RESTful, applications using Spring MVC
 - Spring Security --> Highly customizable authentication and access-control framework for Spring applications.
 - Spring Data JPA --> Persists data in SQL stores with Java Persistence API using Spring Data and Hibernate
 - PostgreSQL Driver --> JDBC & R2DBC driver allowing Java programs to connect to PostgreSQL database using standart Java code
+- Swagger
+- JUnit, Mockito (Unit Testing)
+- SLF4J
 
 ---
 
