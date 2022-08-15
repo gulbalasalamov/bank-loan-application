@@ -225,6 +225,27 @@ New customer with loan score between 500 - 1000 and monthly income below 5000. T
 
 ```
 
+#### Case4: 
+
+New customer with loan score below 500. The application is rejected.
+
+```json
+
+{
+    "id": 20,
+    "loanType": "PERSONAL",
+    "loanLimit": 0.0,
+    "loanScoreResult": "REJECTED",
+    "loanStatus": "INACTIVE",
+    "loanDate": "15-08-2022",
+    "creditMultiplier": 4,
+    "loanApplication": {
+        "id": 12
+    }
+}
+
+```
+
 
 
 
