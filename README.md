@@ -239,18 +239,6 @@ New customer with loan score between 500 - 1000 and monthly income below 5000. T
 
 ---
 
-## Design Use-Case Diagram
-
----
-
-### Use-Case Diagram
-
----
-
-![](to be updated)
-
----
-
 ### ERD Database Design
 
 ---
