@@ -56,6 +56,25 @@ You can also asccess it locally by updating baseUrl with your local server port.
 
 ---
 
+**Step 1. Register Securely**
+
+POST -> SignUp
+
+> https://bank-loan-application-demo.herokuapp.com/api/v1/users/signup
+
+```json
+{
+    "username":"John Cloud",
+    "email":"john@gmail.com",
+    "password":"12345"
+}
+```
+Response Token:
+
+>eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2huIENsb3VkIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9DTElFTlQifV0sImlhdCI6MTY2MDU2MTM1NywiZXhwIjoxNjYwNjQ3NzU3fQ.bkxHd1i1jttct0HVnN8pdCICp38wEKPcKGEoVVrfwso
+
+**Step 2. Add New Customer**
+
 POST -> AddCustomer
 
 > https://bank-loan-application-demo.herokuapp.com/api/v1/customer/add
@@ -75,6 +94,8 @@ Following request will create a bank customer record in the database.
     "loanScore":"1000"
 }
 ```
+
+**Step 3. Check New Customer Information**
 
 GET -> GetCustomerByNationalIdentityNumber 
 
@@ -99,10 +120,13 @@ Following request will return the bank customer with specified national identity
 }
 ```
 
+**Step 4. Create New Loan Application**
+
 POST -> CreateLoanApplication to create a loan application 
 
 > https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/create/{nationalIdentityNumber}
 
+**Step 5. Learn Loan Application Result**
 
 GET ->  GetActiveAndApprovedCreditApplicationByCustomer
 
