@@ -1,6 +1,14 @@
 # Bank Loan Aplication
 
-Some info
+This app is a demonstration for a loan application system. 
+
+Verified users can register as bank customer and apply to loan. 
+
+The bank loan management system would evaluate their application according to custom bank loan criteria and respond customers if they are available to receive loan, and their loan limit. 
+
+To do so, use the CustomerAPI and LoanApplicationAPI for the workflow.
+
+The LoanApi and NotificationAPI is for internal use.
 
 ---
 
