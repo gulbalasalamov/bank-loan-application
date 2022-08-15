@@ -93,9 +93,7 @@ Following request will return the bank customer with specified national identity
 }
 ```
 
-POST -> CreateLoanApplication 
-Following request will create a loan application to be evaluated by the bank system. 
-
+POST -> CreateLoanApplication to create a loan application 
 
 GET ->  GetActiveAndApprovedCreditApplicationByCustomer
 
