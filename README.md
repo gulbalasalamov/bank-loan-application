@@ -37,7 +37,7 @@ This project omplementats Spring Boot framework with given dependencies:
 
 ## API Documentation
 
-[Swagger](to be updated)
+[Swagger]([to be updated](http://localhost:8086/swagger-ui/index.html)
 
 To access Swagger API doc, update baseUrl with your local server port.
 
