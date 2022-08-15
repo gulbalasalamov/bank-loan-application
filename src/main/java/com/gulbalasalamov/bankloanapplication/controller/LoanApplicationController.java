@@ -1,15 +1,11 @@
 package com.gulbalasalamov.bankloanapplication.controller;
 
-import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
 import com.gulbalasalamov.bankloanapplication.model.entity.Loan;
 import com.gulbalasalamov.bankloanapplication.model.entity.LoanApplication;
-import com.gulbalasalamov.bankloanapplication.model.entity.Notification;
 import com.gulbalasalamov.bankloanapplication.service.LoanApplicationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.Pattern;
 
 @RestController
 @RequestMapping("/api/v1/loanapplication")
@@ -33,9 +29,9 @@ public class LoanApplicationController {
     }
 
 
-    @GetMapping(value = "/active-and-approved/{nationalIdentityNumber}")
-    public ResponseEntity<Loan> getActiveAndApprovedCreditApplicationByCustomer(@PathVariable String nationalIdentityNumber) {
-        return new ResponseEntity(loanApplicationService.getActiveAndApprovedLoanApplicationOfCustomer(nationalIdentityNumber), HttpStatus.OK);
+    @GetMapping(value = "/result/{nationalIdentityNumber}")
+    public ResponseEntity<Loan> getLoanApplicationResult(@PathVariable String nationalIdentityNumber) {
+        return new ResponseEntity(loanApplicationService.getLoanApplicationResult(nationalIdentityNumber), HttpStatus.OK);
     }
 
 

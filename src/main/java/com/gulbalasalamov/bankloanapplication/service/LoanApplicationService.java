@@ -1,7 +1,6 @@
 package com.gulbalasalamov.bankloanapplication.service;
 
 import com.gulbalasalamov.bankloanapplication.exception.InvalidLoanApplicationException;
-import com.gulbalasalamov.bankloanapplication.exception.LoanApplicationNotFoundException;
 import com.gulbalasalamov.bankloanapplication.exception.LoanNotFoundException;
 import com.gulbalasalamov.bankloanapplication.model.LoanLimit;
 import com.gulbalasalamov.bankloanapplication.model.LoanScoreResult;
@@ -47,13 +46,17 @@ public class LoanApplicationService {
         });
     }
 
-    public Loan getActiveAndApprovedLoanApplicationOfCustomer(String nationalIdentityNumber) {
-        LoanApplication activeLoanApplicationOfCustomer = getActiveLoanApplicationOfCustomer(nationalIdentityNumber);
 
-        if (activeLoanApplicationOfCustomer.getLoan().getLoanScoreResult().equals(LoanScoreResult.NOT_RESULTED)) {
+
+    public Loan getLoanApplicationResult(String nationalIdentityNumber) {
+        LoanApplication finalizedApplication = finalizeLoanApplication(nationalIdentityNumber);
+
+        if (finalizedApplication.getLoan().getLoanScoreResult().equals(LoanScoreResult.NOT_RESULTED)) {
             throw new InvalidLoanApplicationException("!");
+        } else if (finalizedApplication.getLoan().getLoanScoreResult().equals(LoanScoreResult.REJECTED)) {
+            return finalizedApplication.getLoan();
         }
-        return activeLoanApplicationOfCustomer.getLoan();
+        return finalizedApplication.getLoan();
     }
 
 
@@ -116,7 +119,7 @@ public class LoanApplicationService {
 
     }
 
-    private LoanApplication getActiveLoanApplicationOfCustomer(String nationalIdentityNumber) {
+    private LoanApplication finalizeLoanApplication(String nationalIdentityNumber) {
         Optional<Customer> customerByNationalIdentityNumber = customerRepository.findByNationalIdentityNumber(nationalIdentityNumber);
 
         if (customerByNationalIdentityNumber.isPresent()) {
@@ -128,10 +131,12 @@ public class LoanApplicationService {
 
         return customerByNationalIdentityNumber.get().getLoanApplications().stream()
                 .filter(loanApplication -> loanApplication.getCustomer() == customerByNationalIdentityNumber.get())
-                .filter(loanApplication -> loanApplication.getLoan().getLoanStatus() == LoanStatus.ACTIVE)
+                //.filter(loanApplication -> loanApplication.getLoan().getLoanStatus() == LoanStatus.ACTIVE)
                 .findAny()
                 .orElseThrow(() -> new InvalidLoanApplicationException("."));
     }
+
+
 
 
     protected Optional<LoanApplication> findLoanApplicationById(Long id) {
@@ -142,5 +147,7 @@ public class LoanApplicationService {
     public LoanApplication getLoanApplicationById(Long loanApplicationId) {
         return findLoanApplicationById(loanApplicationId).get();
     }
+
+
 
 }
