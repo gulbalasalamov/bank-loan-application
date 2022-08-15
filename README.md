@@ -69,9 +69,12 @@ POST -> SignUp
     "password":"12345"
 }
 ```
+
 Response Token:
 
 >eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2huIENsb3VkIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9DTElFTlQifV0sImlhdCI6MTY2MDU2MTM1NywiZXhwIjoxNjYwNjQ3NzU3fQ.bkxHd1i1jttct0HVnN8pdCICp38wEKPcKGEoVVrfwso
+
+
 
 **Step 2. Add New Customer**
 
