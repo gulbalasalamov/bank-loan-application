@@ -1,29 +1,10 @@
 package com.gulbalasalamov.bankloanapplication.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
 import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
-//import com.gulbalasalamov.bankloanapplication.service.CustomerService;
-//import org.junit.Assert;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.junit.jupiter.MockitoExtension;
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-//
-//import org.springframework.boot.test.json.JacksonTester;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.MediaType;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.mock.web.MockHttpServletResponse;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-//import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.gulbalasalamov.bankloanapplication.service.CustomerService;
 import org.junit.Assert;
@@ -34,35 +15,33 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJacksonValue;
+
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.client.RestTemplate;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
 class CustomerControllerTest {
 
     private MockMvc mockMvc;
+//    @Autowired
+//    private ObjectMapper mapper;
+
 
     @Mock
     private CustomerService customerService;
@@ -71,9 +50,7 @@ class CustomerControllerTest {
 
     @BeforeEach
     public void setup() {
-        // We would need this line if we would not use the MockitoExtension
-        // MockitoAnnotations.initMocks(this);
-        // Here we can't use @AutoConfigureJsonTesters because there isn't a Spring context
+
         JacksonTester.initFields(this, new ObjectMapper());
         // MockMvc standalone approach
         mockMvc = MockMvcBuilders.standaloneSetup(customerController)
@@ -104,11 +81,12 @@ class CustomerControllerTest {
         // init test values
         List<CustomerDTO> expectedCustomerDTOList = createDummyCustomerDtoList();
         String nationalIdentityNumber = "11111111111";
+        String url = "http://localhost:8086/api/v1/customer/get/11111111111";
 
         // stub - given
         Mockito.when(customerService.getCustomerByNationalIdentityNumber(nationalIdentityNumber)).thenReturn(expectedCustomerDTOList.get(0));
 
-        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8086/api/v1/customer/get/11111111111")
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get(url)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn().getResponse();
@@ -123,35 +101,30 @@ class CustomerControllerTest {
     void shouldAddCustomer() throws Exception {
         var dummyCustomerDTO = createDummyCustomerDTO();
 
+        String url = "http://localhost:8086/api/v1/customer/add/";
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String expectedAirportJsonStr = ow.writeValueAsString(dummyCustomerDTO);
-        Mockito.doNothing().when(customerService).addCustomer(dummyCustomerDTO);
 
-        MockHttpServletResponse response = mockMvc.perform(post("/api/customer/add")
-                        .accept(MediaType.APPLICATION_JSON)
+        String json = ow.writeValueAsString(dummyCustomerDTO);
+
+        mockMvc.perform(post(url)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(expectedAirportJsonStr))
-                .andDo(MockMvcResultHandlers.print())
-                .andReturn().getResponse();
-
-        // then
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
-        Mockito.verify(customerService, Mockito.times(1)).addCustomer(any());
-
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
 
     }
 
-    @Test
-    void updateCustomer() {
-    }
-
-    @Test
-    void updateCustomerPartially() {
-    }
-
-    @Test
-    void deleteCustomer() {
-    }
+//    @Test
+//    void updateCustomer() {
+//    }
+//
+//    @Test
+//    void updateCustomerPartially() {
+//    }
+//
+//    @Test
+//    void deleteCustomer() {
+//    }
 
 
     private Customer createDummyCustomer() {
