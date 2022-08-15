@@ -139,7 +139,24 @@ New customer with loan score 1000 and more, and monthly income above 5000. The a
 
 #### Case2: 
 
-New customer with loan score between 500 - 1000 and monthly income above 5000. The application is approved and loan limit 20.000 set.
+New customer with loan score between 500 - 1000 and monthly income above 5000. The application is approved and loan limit 20.000 
+
+```json
+
+{
+    "id": 22,
+    "loanType": "PERSONAL",
+    "loanLimit": 20000.0,
+    "loanScoreResult": "APPROVED",
+    "loanStatus": "ACTIVE",
+    "loanDate": "15-08-2022",
+    "creditMultiplier": 4,
+    "loanApplication": {
+        "id": 6
+    }
+}
+
+```
 
 
 #### Case3: 
