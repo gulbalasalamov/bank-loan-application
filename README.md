@@ -74,6 +74,6 @@ To access Swagger API doc, update baseUrl with your local server port.
 
 ---
 
-![](to be updated)
+![](https://github.com/gulbalasalamov/bank-loan-application/blob/master/doc/loan-application-erd.png)
 
 ---
