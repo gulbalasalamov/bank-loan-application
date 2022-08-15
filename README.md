@@ -6,7 +6,7 @@ The app is **live** and accessible on: https://bank-loan-application-demo.heroku
 
 You can play around directly using the endpoints. 
 
-For documentation please page scroll below.
+For documentation click [here](#api-documentation)
 
 ## Project Brief
 
