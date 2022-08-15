@@ -37,6 +37,8 @@ This project omplementats Spring Boot framework with given dependencies:
 
 ## API Documentation
 
+---
+
 To access Swagger doc, click live link below: 
 
 https://bank-loan-application-demo.herokuapp.com/swagger-ui/index.html
@@ -47,6 +49,11 @@ You can also asccess it locally by updating baseUrl with your local server port.
 
 ![image](https://user-images.githubusercontent.com/19313466/184607079-d706432f-460f-4323-873d-a95ebef97453.png)
 
+--- 
+
+## API Demonstration
+
+---
 
 POST http://localhost:8086/api/v1/customer/add
 
@@ -95,6 +102,27 @@ GET http://localhost:8086/api/v1/loanapplication/get/active-and-approved/{nation
 Following request will return an active and approved loan application with loan limit. 
 
 ```json
+
+{
+    "id": 21,
+    "loanType": "PERSONAL",
+    "loanLimit": 10000.0,
+    "loanScoreResult": "APPROVED",
+    "loanStatus": "ACTIVE",
+    "loanDate": "15-08-2022",
+    "creditMultiplier": 4,
+    "loanApplication": {
+        "id": 5
+    }
+}
+
+```
+
+
+#### Case1: 
+New customer with loan score 1000 and more, and monthly income above 5000. The application is approved and loan limit specually calculated.
+ 
+```json
 {
     "id": 17,
     "loanType": "PERSONAL",
@@ -108,6 +136,33 @@ Following request will return an active and approved loan application with loan 
     }
 }
 ```
+
+#### Case2: 
+
+New customer with loan score between 500 - 1000 and monthly income above 5000. The application is approved and loan limit 20.000 set.
+
+
+#### Case3: 
+
+New customer with loan score between 500 - 1000 and monthly income below 5000. The application is approved and loan limit 10.000 set.
+
+```json
+
+{
+    "id": 20,
+    "loanType": "PERSONAL",
+    "loanLimit": 10000.0,
+    "loanScoreResult": "APPROVED",
+    "loanStatus": "ACTIVE",
+    "loanDate": "15-08-2022",
+    "creditMultiplier": 4,
+    "loanApplication": {
+        "id": 4
+    }
+}
+
+```
+
 
 ---
 
