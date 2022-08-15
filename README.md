@@ -1,6 +1,6 @@
 # Bank Loan Aplication
 
-This app is a demonstration for a loan application system. 
+The product is live and active on Heroku environment. The app is a demonstration for a loan application system. 
 
 Verified users can register as bank customer and apply to loan. 
 
@@ -43,6 +43,7 @@ To access Swagger doc, click live link below:
 
 https://bank-loan-application-demo.herokuapp.com/swagger-ui/index.html
 
+
 You can also asccess it locally by updating baseUrl with your local server port.
 
 > {{baseUrl}}/swagger-ui/index.html .
@@ -56,6 +57,8 @@ You can also asccess it locally by updating baseUrl with your local server port.
 ---
 
 POST -> AddCustomer
+
+> https://bank-loan-application-demo.herokuapp.com/api/v1/customer/add
 
 Following request will create a bank customer record in the database. 
 
@@ -74,6 +77,9 @@ Following request will create a bank customer record in the database.
 ```
 
 GET -> GetCustomerByNationalIdentityNumber 
+
+> https://bank-loan-application-demo.herokuapp.com/api/v1/customer/get/{nationalIdentityNumber}
+
 
 Following request will return the bank customer with specified national identity number. 
 
@@ -95,7 +101,13 @@ Following request will return the bank customer with specified national identity
 
 POST -> CreateLoanApplication to create a loan application 
 
+> https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/create/{nationalIdentityNumber}
+
+
 GET ->  GetActiveAndApprovedCreditApplicationByCustomer
+
+> https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/active-and-approved/{nationalIdentityNumber}
+
 
 Following request will return an active and approved loan application with loan limit. 
 
