@@ -25,9 +25,9 @@ This project implementats Spring Boot framework with given dependencies:
 - Spring Security --> Highly customizable authentication and access-control framework for Spring applications.
 - Spring Data JPA --> Persists data in SQL stores with Java Persistence API using Spring Data and Hibernate
 - PostgreSQL Driver --> JDBC & R2DBC driver allowing Java programs to connect to PostgreSQL database using standart Java code
-- Swagger
-- JUnit, Mockito (Unit Testing)
-- SLF4J
+- Swagger --> OAS Rest Documentation
+- JUnit, Mockito -> (Unit Testing)
+- SLF4J --> Logging
 
 ---
 
