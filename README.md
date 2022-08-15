@@ -85,6 +85,29 @@ Following request will return the bank customer with specified national identity
     "loanApplications": []
 }
 ```
+POST http://localhost:8086/api/v1/loanapplication/create/{nationalIdentityNumber}
+
+Following request will create a loan application to be evaluated by the bank system. 
+
+
+GET http://localhost:8086/api/v1/loanapplication/get/active-and-approved/{nationalIdentyNumber}
+
+Following request will return an active and approved loan application with loan limit. 
+
+```json
+{
+    "id": 17,
+    "loanType": "PERSONAL",
+    "loanLimit": 40000.0,
+    "loanScoreResult": "APPROVED",
+    "loanStatus": "ACTIVE",
+    "loanDate": "15-08-2022",
+    "creditMultiplier": 4,
+    "loanApplication": {
+        "id": 1
+    }
+}
+```
 
 ---
 
@@ -126,7 +149,3 @@ Following request will return the bank customer with specified national identity
 ![](https://github.com/gulbalasalamov/bank-loan-application/blob/master/doc/loan-application-erd.png)
 
 ---
-
-### Demonstration
-
-![image](https://user-images.githubusercontent.com/19313466/184616627-214583d5-92c5-4d6d-b16a-80025e01a6a5.png)
