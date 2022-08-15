@@ -55,7 +55,7 @@ You can also asccess it locally by updating baseUrl with your local server port.
 
 ---
 
-POST http://localhost:8086/api/v1/customer/add
+POST -> AddCustomer
 
 Following request will create a bank customer record in the database. 
 
@@ -73,7 +73,7 @@ Following request will create a bank customer record in the database.
 }
 ```
 
-GET http://localhost:8086/api/v1/customer/get/{nationalIdentityNumber}
+GET -> GetCustomerByNationalIdentityNumber 
 
 Following request will return the bank customer with specified national identity number. 
 
@@ -92,12 +92,12 @@ Following request will return the bank customer with specified national identity
     "loanApplications": []
 }
 ```
-POST http://localhost:8086/api/v1/loanapplication/create/{nationalIdentityNumber}
 
+POST -> CreateLoanApplication 
 Following request will create a loan application to be evaluated by the bank system. 
 
 
-GET http://localhost:8086/api/v1/loanapplication/get/active-and-approved/{nationalIdentyNumber}
+GET ->  GetActiveAndApprovedCreditApplicationByCustomer
 
 Following request will return an active and approved loan application with loan limit. 
 
