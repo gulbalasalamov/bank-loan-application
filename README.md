@@ -47,6 +47,45 @@ You can also asccess it locally by updating baseUrl with your local server port.
 
 ![image](https://user-images.githubusercontent.com/19313466/184607079-d706432f-460f-4323-873d-a95ebef97453.png)
 
+
+POST http://localhost:8086/api/v1/customer/add
+
+Following request will create a bank customer record in the database. 
+
+```json
+{
+    "nationalIdentityNumber": "93111111111",
+    "firstName": "{{$randomFullName}}",
+    "lastName": "{{$randomLastName}}",
+    "phone": "{{$randomPhoneNumber}}",
+    "email": "{{$randomEmail}}",
+    "monthlyIncome": "10000",
+    "gender": "male",
+    "age": "{{$randomInt}}",
+    "loanScore":"1000"
+}
+```
+
+GET http://localhost:8086/api/v1/customer/get/{nationalIdentityNumber}
+
+Following request will return the bank customer with specified national identity number. 
+
+
+```json
+{
+    "nationalIdentityNumber": "93111111111",
+    "firstName": "Isaac Terry",
+    "lastName": "Baumbach",
+    "phone": "947-893-1929",
+    "email": "Leon76@hotmail.com",
+    "monthlyIncome": 10000.0,
+    "gender": "male",
+    "age": 661,
+    "loanScore": 1000,
+    "loanApplications": []
+}
+```
+
 ---
 
 ## Functional Requirements & Analysis
@@ -87,3 +126,7 @@ You can also asccess it locally by updating baseUrl with your local server port.
 ![](https://github.com/gulbalasalamov/bank-loan-application/blob/master/doc/loan-application-erd.png)
 
 ---
+
+### Demonstration
+
+![image](https://user-images.githubusercontent.com/19313466/184616627-214583d5-92c5-4d6d-b16a-80025e01a6a5.png)
