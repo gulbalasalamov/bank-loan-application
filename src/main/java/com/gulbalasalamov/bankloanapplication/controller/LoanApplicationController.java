@@ -35,7 +35,6 @@ public class LoanApplicationController {
 
     @GetMapping(value = "/active-and-approved/{nationalIdentityNumber}")
     public ResponseEntity<Loan> getActiveAndApprovedCreditApplicationByCustomer(@PathVariable String nationalIdentityNumber) {
-        ;
         return new ResponseEntity(loanApplicationService.getActiveAndApprovedLoanApplicationOfCustomer(nationalIdentityNumber), HttpStatus.OK);
     }
 

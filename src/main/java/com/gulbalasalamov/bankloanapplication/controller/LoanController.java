@@ -20,8 +20,6 @@ public class LoanController {
         this.loanService = loanService;
     }
 
-    //    @GetMapping("/{nationalIdentityNumber}")
-//    public ResponseEntity<Loan> getActiveAndApprovedLoanApplicationByCustomer
     @PostMapping("/create")
     public ResponseEntity<Integer> createLoan(@RequestBody Loan loan) {
         loanService.createLoan(loan);

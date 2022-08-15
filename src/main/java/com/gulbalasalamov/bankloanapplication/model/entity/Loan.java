@@ -26,7 +26,6 @@ public class Loan {
     @Enumerated(EnumType.STRING)
     private LoanType loanType;
 
-    //@Enumerated(EnumType.STRING)
     private Double loanLimit;
 
     @Enumerated(EnumType.STRING)
@@ -37,7 +36,6 @@ public class Loan {
 
     @CreationTimestamp
     @JsonFormat(pattern = "dd-MM-yyyy")
-    //@Column(updatable = false, nullable = false)
     private Date loanDate;
 
     private final Integer creditMultiplier = 4;

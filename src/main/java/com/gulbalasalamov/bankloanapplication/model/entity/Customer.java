@@ -17,9 +17,6 @@ import java.util.List;
 
 public class Customer {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long id;
-
     @Column(name = "national_identity_number",length = 11,updatable = false, nullable = false)
     @NotBlank(message = "national identity number can not be blank")
     @Pattern(regexp = "[1-9][0-9]{10}")
@@ -34,7 +31,6 @@ public class Customer {
 
     @NotNull(message = "monthly income can not be null")
     @Min(1)
-    //@Column(name = "monthly_income")
     private Double monthlyIncome;
 
     private String gender;

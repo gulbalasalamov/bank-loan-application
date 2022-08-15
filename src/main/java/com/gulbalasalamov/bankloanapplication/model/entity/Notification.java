@@ -21,9 +21,4 @@ public class Notification {
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "notification")
     private LoanApplication loanApplication;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinTable(name = "notification_loan_application",
-//            joinColumns = {@JoinColumn(name = "notification_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "loan_application_id")})
-//    private LoanApplication loanApplication;
 }
