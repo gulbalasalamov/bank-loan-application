@@ -58,9 +58,9 @@ To have it your way in postman, fork it to your workspace and play around:
 
 **Step 1. Register Securely**
 
-POST -> SignUp
-
-> https://bank-loan-application-demo.herokuapp.com/api/v1/users/signup
+| Type | Method |
+| ------ | ------ |
+| POST | https://bank-loan-application-demo.herokuapp.com/api/v1/users/signup |
 
 ```json
 {
@@ -78,9 +78,10 @@ Response Token:
 
 **Step 2. Add New Customer**
 
-POST -> AddCustomer
 
-> https://bank-loan-application-demo.herokuapp.com/api/v1/customer/add
+| Type | Method |
+| ------ | ------ |
+| POST | https://bank-loan-application-demo.herokuapp.com/api/v1/customer/add |
 
 Following request will create a bank customer record in the database. 
 
@@ -100,9 +101,9 @@ Following request will create a bank customer record in the database.
 
 **Step 3. Check New Customer Information**
 
-GET -> GetCustomerByNationalIdentityNumber 
-
-> https://bank-loan-application-demo.herokuapp.com/api/v1/customer/get/{nationalIdentityNumber}
+| Type | Method |
+| ------ | ------ |
+| GET | https://bank-loan-application-demo.herokuapp.com/api/v1/customer/get/{nationalIdentityNumber} |
 
 
 Following request will return the bank customer with specified national identity number. 
@@ -125,15 +126,18 @@ Following request will return the bank customer with specified national identity
 
 **Step 4. Create New Loan Application**
 
-POST -> CreateLoanApplication to create a loan application 
 
-> https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/create/{nationalIdentityNumber}
+| Type | Method |
+| ------ | ------ |
+| POST | https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/create/{nationalIdentityNumber} |
+
 
 **Step 5. Learn Loan Application Result**
 
-GET ->  GetActiveAndApprovedCreditApplicationByCustomer
 
-> https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/active-and-approved/{nationalIdentityNumber}
+| Type | Method |
+| ------ | ------ |
+| GET |https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/active-and-approved/{nationalIdentityNumber} |
 
 
 Following request will return an active and approved loan application with loan limit. 
