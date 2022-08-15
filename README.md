@@ -37,9 +37,11 @@ This project omplementats Spring Boot framework with given dependencies:
 
 ## API Documentation
 
-[Swagger]([to be updated](http://localhost:8086/swagger-ui/index.html)
+To access Swagger doc, click live link below: 
 
-To access Swagger API doc, update baseUrl with your local server port.
+https://bank-loan-application-demo.herokuapp.com/swagger-ui/index.html
+
+You can also asccess it locally by updating baseUrl with your local server port.
 
 > {{baseUrl}}/swagger-ui/index.html .
 
