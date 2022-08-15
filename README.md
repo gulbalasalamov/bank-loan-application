@@ -35,7 +35,7 @@ To access Swagger API doc, update baseUrl with your local server port.
 
 > {{baseUrl}}/swagger-ui/index.html .
 
-![image](to be updated)
+![image](https://user-images.githubusercontent.com/19313466/184607079-d706432f-460f-4323-873d-a95ebef97453.png)
 
 ---
 
