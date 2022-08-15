@@ -4,6 +4,7 @@ import com.gulbalasalamov.bankloanapplication.exception.CustomerNotFoundExceptio
 import com.gulbalasalamov.bankloanapplication.model.dto.CustomerDTO;
 import com.gulbalasalamov.bankloanapplication.model.entity.Customer;
 import com.gulbalasalamov.bankloanapplication.repository.CustomerRepository;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 import static org.mockito.Mockito.mock;
@@ -27,45 +29,29 @@ class CustomerServiceTest {
     private CustomerRepository customerRepository;
 
     @InjectMocks
-    private CustomerService customerService;
+    private CustomerService customerServiceUnderTest;
 
     @Test
-    void shouldNotFindAccountByCustomerNationalIdentityNumber_WhenId_DoesNotExist(){
+    void shouldNotFindAccountByCustomerNationalIdentityNumber_WhenId_DoesNotExist() {
 
-        when(customerService.getCustomerByNationalIdentityNumber(null)).thenThrow(CustomerNotFoundException.class);
+        when(customerServiceUnderTest.getCustomerByNationalIdentityNumber(null)).thenThrow(CustomerNotFoundException.class);
 
         assertThrows(CustomerNotFoundException.class, () -> customerRepository.findByNationalIdentityNumber(""));
 
-        verify(customerService).getCustomerByNationalIdentityNumber(null);
+        verify(customerServiceUnderTest).getCustomerByNationalIdentityNumber(null);
     }
 
     @Test
     void shouldGetCustomerByNationalIdentityNumber() {
 
-//        Customer customer= createDummyCustomer();
-//        when(customerRepository.findByNationalIdentityNumber(nationalIdentityNumber)).thenReturn(Optional.of(customer));
+        //Given
+        String nationalIdentityNumber = "11111111111";
+        CustomerDTO expectedCustomerDTO = createDummyCustomerDTO();
+        //CustomerDTO expectedCustomerDTO = mock(CustomerDTO.class);
+        when(customerServiceUnderTest.getCustomerByNationalIdentityNumber(nationalIdentityNumber)).thenReturn(expectedCustomerDTO);
 
-//        String nationalIdentityNumber = "11111111111";
-//
-//     //   Customer customer = mock(Customer.class);
-//
-//        CustomerDTO customerDTO2 = createDummyCustomerDTO();
-////        CustomerDTO customerDTO = mock(customerDTO2.getClass());
-////kanka sen cikmna lazimdi. isini oncelikli olani yap. vaktin olrsa aksam devam ederiz. benden oturu geri dusme. tmm. bende tutorial izlemeye dvm edeym
-//        //yarim saat var
-//        customerService.addCustomer(customerDTO2);
-//
-//        when(customerService.getCustomerByNationalIdentityNumber(nationalIdentityNumber)).thenReturn(customerDTO2);
-//        when(customerRepository.findByNationalIdentityNumber(nationalIdentityNumber)).thenReturn(customerDTO2);
-//
-//        Customer actualCustomer = customerRepository.findByNationalIdentityNumber(nationalIdentityNumber).get();
-//
-//        assertEquals(nationalIdentityNumber,actualCustomer.getNationalIdentityNumber());
-
-
-
-        // assertEquals(nationalIdentityNumber, customerDTO.getNationalIdentityNumber());
-        //assertEquals(nationalIdentityNumber,.getNationalIdentityNumber());
+        Customer actualCustomer = customerRepository.findByNationalIdentityNumber(nationalIdentityNumber).get();
+        assertEquals(nationalIdentityNumber,actualCustomer.getNationalIdentityNumber());
     }
 
     @Test
@@ -74,7 +60,7 @@ class CustomerServiceTest {
         var expCustomerList = new ArrayList<CustomerDTO>();
         expCustomerList.add(customer);
 
-        when(customerService.getAllCustomers()).thenReturn(expCustomerList);
+        when(customerServiceUnderTest.getAllCustomers()).thenReturn(expCustomerList);
 
         List<Customer> actCustomerList = customerRepository.findAll();
 
@@ -83,9 +69,23 @@ class CustomerServiceTest {
     }
 
 
-
     @Test
-    void addCustomer() {
+    void shouldAddNewCustomer() {
+        //Given
+        String nationalIdentityNumber = "11111111111";
+        CustomerDTO customerDTOExpected = createDummyCustomerDTO();
+
+        //When
+        customerServiceUnderTest.addCustomer(customerDTOExpected);
+
+        //Then
+        CustomerDTO actualCustomerDTO = customerServiceUnderTest.getCustomerByNationalIdentityNumber(nationalIdentityNumber);
+
+        Assert.assertEquals(customerDTOExpected,actualCustomerDTO);
+        //then
+        //then(customerServiceUnderTest).should().save()
+
+
 //        CustomerDTO customerDTO = createDummyCustomerDTO();
 //        Customer customer = createDummyCustomer();
 //
@@ -116,9 +116,9 @@ class CustomerServiceTest {
         return new CustomerDTO("11111111111", "John", "Cloud", "1", "g@g.com", 10.0, "Female", 5, 1, null);
     }
 
-    private List<CustomerDTO> createDummyCustomerDtoList(){
+    private List<CustomerDTO> createDummyCustomerDtoList() {
 
-        List<CustomerDTO>  customerDTOList = new ArrayList<>();
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
 
         CustomerDTO customerDTO = createDummyCustomerDTO();
         customerDTOList.add(customerDTO);
