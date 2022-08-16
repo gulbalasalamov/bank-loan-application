@@ -1,23 +1,12 @@
 # Bank Loan Aplication
 
-The purpose of this project is to build a potential backend system for bank loan application system. 
+The purpose of this project is to build a potential backend system for bank loan application system. Registered users can create a customer account and apply to loan. The bank loan management system would evaluate their application according to custom bank loan criteria and respond customers if they are available to receive loan, and their loan limit. 
 
 The app is **live** and accessible on: https://bank-loan-application-demo.herokuapp.com
 
 You can play around directly using the endpoints. 
 
 For documentation click [here](#api-documentation)
-
-## Project Brief
-
-Verified users can register as bank customer and apply to loan. 
-
-The bank loan management system would evaluate their application according to custom bank loan criteria and respond customers if they are available to receive loan, and their loan limit. 
-
-To do so, use the CustomerAPI and LoanApplicationAPI for the workflow.
-
-The LoanApi and NotificationAPI is for internal use.
-
 
 ## Technologies Used
 
@@ -37,23 +26,19 @@ This project implementats Spring Boot framework with given dependencies:
 
 ## API Documentation
 
+To have it your way in postman, fork it to your workspace and play around: 
 
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5231798-289c2878-e5a2-41ac-9cbb-e95f614d998d?action=collection%2Ffork&collection-url=entityId%3D5231798-289c2878-e5a2-41ac-9cbb-e95f614d998d%26entityType%3Dcollection%26workspaceId%3D0c774f82-43e3-4f89-961b-2b4f9bfabddc)
 
 To access Swagger doc, click live link below: 
 
 https://bank-loan-application-demo.herokuapp.com/swagger-ui/index.html
-
 
 You can also asccess it locally by updating baseUrl with your local server port.
 
 > {{baseUrl}}/swagger-ui/index.html .
 
 ![image](https://user-images.githubusercontent.com/19313466/184607079-d706432f-460f-4323-873d-a95ebef97453.png)
-
-To have it your way in postman, fork it to your workspace and play around: 
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5231798-289c2878-e5a2-41ac-9cbb-e95f614d998d?action=collection%2Ffork&collection-url=entityId%3D5231798-289c2878-e5a2-41ac-9cbb-e95f614d998d%26entityType%3Dcollection%26workspaceId%3D0c774f82-43e3-4f89-961b-2b4f9bfabddc)
-
  
 
 ## API Demonstration
@@ -141,7 +126,7 @@ Following request will return the bank customer with specified national identity
 
 | Type | Method |
 | ------ | ------ |
-| GET |https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/active-and-approved/{nationalIdentityNumber} |
+| GET | https://bank-loan-application-demo.herokuapp.com/api/v1/loanapplication/result/{nationalIdentityNumber} |
 
 
 Following request will return an active and approved loan application with loan limit. 
