@@ -71,29 +71,6 @@ class CustomerRepositoryTest {
                 });
     }
 
-//    @Test
-//    void shouldNotSaveCustomerWhenCustomerNationalIdentityNumberLengthIsLessThan11(){
-//        //Given
-//        String nationalIdentityNumber = "";
-//        Customer expectedCustomer = new Customer("1", "Gulbala", "Salamov", 100.0, "Male", 19, "1234", "g@gmail.com", 1, null);
-//
-//        //When
-//        //customerRepositoryUnderTest.save(expectedCustomer);
-//
-//        //Then
-//
-//
-//        assertThatThrownBy(() -> customerRepositoryUnderTest.save(expectedCustomer))
-//                .hasMessageContaining("unsatisfying field info:")
-//                .isInstanceOf(DataIntegrityViolationException.class)
-//                .isEqualToComparingFieldByField(createDummyCustomer());
-//              //  .extracting("something", InstanceOfAssertFactories.ITERABLE)
-//               // .contains();
-//
-//
-//    }
-
-
 
     private Customer createDummyCustomer() {
         return new Customer("11111111111", "Gulbala", "Salamov", 100.0, "Male", 19, "1234", "g@gmail.com", 1, null);
